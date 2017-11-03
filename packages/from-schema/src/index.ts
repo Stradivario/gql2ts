@@ -244,7 +244,7 @@ const run: (schemaInput: GraphQLSchema, optionsInput: IInternalOptions) => strin
         });
       }
     });
-
+    const typesWithExport:string[] = [];
     const typeInterfaces: string[] =
       typeArr
         .filter(type => !type.name.startsWith('__'))  // remove introspection types
@@ -255,9 +255,9 @@ const run: (schemaInput: GraphQLSchema, optionsInput: IInternalOptions) => strin
           typeToInterface(type, ignoredTypes, supportsNullability, interfaceMap)!
         )
         .filter(type => type);                        // remove empty ones
-
+        typeInterfaces.forEach(type => typesWithExport.push(type.replace(/interface/g, "export interface")))
     return interfaces
-      .concat(typeInterfaces)                   // add typeInterfaces to return object
+      .concat(typesWithExport)                   // add typeInterfaces to return object
       .join('\n\n');                            // add newlines between interfaces
   };
 

@@ -63,9 +63,9 @@ export const ADD_SEMICOLON: WrapType = str => `${str};`;
 export const DEFAULT_NAMESPACE_GENERATOR: NamespaceGenerator = (namespaceName, interfaces) => `// tslint:disable
 // graphql typescript definitions
 
-declare namespace ${namespaceName} {
+
 ${interfaces}
-}
+
 
 // tslint:enable
 `;
